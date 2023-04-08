@@ -229,4 +229,4 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-cef_binary
+cef_binary*
