@@ -1,4 +1,4 @@
-# BluBrowser for [BLUI](https://github.com/AaronShea/BLUI)
+# BluBrowser for [BLUI](https://github.com/getnamo/BLUI-unreal)
 
 ## What?
 This is the CEF code of the child process for BLUI. **It's not recommended to mess with this at the moment.** It's a modified CefSimple example to include the blu_event function which notifies BLUI of Javascript events in the UE4 game engine.
@@ -10,4 +10,8 @@ This is the CEF code of the child process for BLUI. **It's not recommended to me
 * (If you want to build the blu_browser.exe process) Switch "libcef\_dll\_wrapper" to output "Multi-threaded (/MT)"
 * Build the solution, and it will produce the proper dlls, lib files, or the child process exe.
 
-(Again, I don't recommend this, I will be distributing the correct binaries in BLUI releases on [It's repo page!](https://github.com/AaronShea/BLUI))
+## Related guide issues
+
+https://github.com/getnamo/BLUI-Unreal/issues/29
+
+https://github.com/getnamo/BLUI-Unreal/issues/60
