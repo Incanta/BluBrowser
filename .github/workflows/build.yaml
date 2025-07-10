@@ -1,0 +1,52 @@
+name: Build
+run-name: Release ${{ inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'CEF Version'
+        required: true
+        type: string
+
+env:
+  BASH_ENV: ~/.profile
+
+jobs:
+  cleanup:
+    strategy:
+      matrix:
+        os: [ "Windows", "Linux", "macOS" ]
+    runs-on: [ self-hosted, "${{ matrix.os }}" ]
+    steps:
+      - name: Clean
+        run: Remove-Item -Recurse -Force *
+        if: ${{ matrix.os == 'Windows' }}
+      - name: Clean
+        run: rm -rf *
+        if: ${{ matrix.os == 'Linux' || matrix.os == 'macOS' }}
+  cef_source:
+    strategy:
+      matrix:
+        os: [ "Windows", "Linux", "macOS" ]
+    runs-on: [ self-hosted, "${{ matrix.os }}" ]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Clone CEF source
+        run: git clone https://github.com/chromiumembedded/cef.git
+      - name: Checkout CEF version
+        run: git checkout ${{ inputs.version }}
+        working-directory: ./cef
+      - name: Replace cefsimple code
+        if: ${{ matrix.os == 'Windows' }}
+        working-directory: ./cef/tests
+        run: |
+          Remove-Item -Recurse -Force cefsimple
+          cp -r ../../BluBrowser cefsimple
+      - name: Replace cefsimple code
+        if: ${{ matrix.os == 'Linux' || matrix.os == 'macOS' }}
+        working-directory: ./cef/tests
+        run: |
+          rm -rf cefsimple
+          cp -r ../../BluBrowser cefsimple
