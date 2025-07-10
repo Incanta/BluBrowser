@@ -16,7 +16,7 @@ jobs:
   cleanup:
     strategy:
       matrix:
-        os: [ "Windows", "Linux", "macOS" ]
+        os: [ "Windows" ]
     runs-on: [ self-hosted, "${{ matrix.os }}" ]
     steps:
       - name: Clean
@@ -28,7 +28,7 @@ jobs:
   cef_source:
     strategy:
       matrix:
-        os: [ "Windows", "Linux", "macOS" ]
+        os: [ "Windows" ]
     runs-on: [ self-hosted, "${{ matrix.os }}" ]
     steps:
       - name: Checkout Repo
