@@ -30,6 +30,7 @@ jobs:
       matrix:
         os: [ "Windows" ]
     runs-on: [ self-hosted, "${{ matrix.os }}" ]
+    needs: [ cleanup ]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
