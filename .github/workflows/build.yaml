@@ -13,24 +13,24 @@ env:
   BASH_ENV: ~/.profile
 
 jobs:
-  cleanup:
-    strategy:
-      matrix:
-        os: [ "Windows" ]
-    runs-on: [ self-hosted, "${{ matrix.os }}" ]
-    steps:
-      - name: Clean
-        run: Remove-Item -Recurse -Force *
-        if: ${{ matrix.os == 'Windows' }}
-      - name: Clean
-        run: rm -rf *
-        if: ${{ matrix.os == 'Linux' || matrix.os == 'macOS' }}
+  # cleanup:
+  #   strategy:
+  #     matrix:
+  #       os: [ "Windows" ]
+  #   runs-on: [ self-hosted, "${{ matrix.os }}" ]
+  #   steps:
+  #     - name: Clean
+  #       run: Remove-Item -Recurse -Force *
+  #       if: ${{ matrix.os == 'Windows' }}
+  #     - name: Clean
+  #       run: rm -rf *
+  #       if: ${{ matrix.os == 'Linux' || matrix.os == 'macOS' }}
   cef_source:
     strategy:
       matrix:
         os: [ "Windows" ]
     runs-on: [ self-hosted, "${{ matrix.os }}" ]
-    needs: [ cleanup ]
+    # needs: [ cleanup ]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
